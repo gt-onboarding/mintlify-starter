@@ -1,0 +1,112 @@
+---
+title: 'Markdown構文'
+description: '標準的なMarkdownにおけるテキスト、title、スタイル'
+icon: 'text-size'
+---
+
+<div id="titles">
+  ## タイトル
+</div>
+
+セクション見出しに最適です。
+
+```md
+<div id="titles">
+  ## タイトル
+</div>
+
+```
+
+
+<div id="subtitles">
+  ### サブタイトル
+</div>
+
+セクション内の小見出しとして使うのに最適です。
+
+```md
+<div id="subtitles">
+  ### サブタイトル
+</div>
+
+```
+
+<Tip>
+  それぞれの **title** と **subtitle** はアンカーになり、右側の目次にも表示されます。
+</Tip>
+
+
+<div id="text-formatting">
+  ## テキストの書式設定
+</div>
+
+ほとんどのMarkdownによる書式設定をサポートしています。テキストの前後に `**`、`_`、`~` を追加して装飾します。
+
+| スタイル        | 書き方              | 結果                |
+| --------------- | ------------------- | ------------------- |
+| 太字            | `**bold**`          | **bold**            |
+| 斜体            | `_italic_`          | _italic_            |
+| 取り消し線      | `~strikethrough~`   | ~strikethrough~     |
+
+これらを組み合わせることもできます。たとえば、`**_bold and italic_**` と書くと、**_bold and italic_** のテキストになります。
+
+上付き文字と下付き文字を書くには、HTMLを使用する必要があります。つまり、テキストを `<sup>` または `<sub>` タグで囲みます。
+
+| 文字の種類 | 書き方                       | 結果                        |
+| ---------- | ---------------------------- | --------------------------- |
+| 上付き文字 | `<sup>superscript</sup>`     | <sup>superscript</sup>      |
+| 下付き文字 | `<sub>subscript</sub>`       | <sub>subscript</sub>        |
+
+<div id="linking-to-pages">
+  ## ページへのリンク
+</div>
+
+テキストを `[]()` で囲むことでリンクを追加できます。たとえば、`[link to google](https://google.com)` と書くと、[link to google](https://google.com) へのリンクになります。
+
+ドキュメント内のページへのリンクは、ルート相対パスで指定する必要があります。基本的には、フォルダーのパス全体を含めてください。たとえば、`[link to text](/writing-content/text)` は、コンポーネントセクションにある「Text」ページへのリンクになります。
+
+`[link to text](../text)` のような相対リンクは、最適化しにくいため、表示が遅くなります。
+
+<div id="blockquotes">
+  ## 引用ブロック
+</div>
+
+<div id="singleline">
+  ### 単一行
+</div>
+
+引用ブロックを作成するには、段落の先頭に `>` を追加します。
+
+> ドロシーは彼女のあとについて、城の中の多くの美しい部屋を通り抜けていきました。
+
+```md
+> ドロシーは彼女の後について、城の美しい部屋をいくつも通り抜けました。
+```
+
+
+<div id="multiline">
+  ### 複数行
+</div>
+
+> ドロシーは、彼女のあとについて城の中のたくさんの美しい部屋を通り抜けていきました。
+>
+> 魔女は、鍋ややかんを洗い、床を掃き、薪をくべて火を絶やさないようにするよう命じました。
+
+```md
+> Dorothy followed her through many of the beautiful rooms in her castle.
+>
+> The Witch bade her clean the pots and kettles and sweep the floor and keep the fire fed with wood.
+```
+
+
+<div id="latex">
+  ### LaTeX
+</div>
+
+Mintlify は LaTeX コンポーネントを使って [LaTeX](https://www.latex-project.org) をサポートしています。
+
+<Latex>8 x (vk x H1 - H2) = (0,1)</Latex>
+
+```md
+<Latex>8 x (vk x H1 - H2) = (0,1)</Latex>
+```

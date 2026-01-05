@@ -34,6 +34,9 @@
             }
           }
         }
+      },
+      "./api-reference/openapi.json": {
+        "preset": "openapi"
       }
     },
     "docsUrlPattern": "/[locale]",
@@ -48,7 +51,14 @@
   "files": {
     "json": {
       "include": [
-        "./docs.json"
+        "./docs.json",
+        "./api-reference/openapi.json"
+      ],
+      "transform": [
+        {
+          "match": "^api-reference/openapi.json$",
+          "replace": "{locale}/api-reference/openapi.json"
+        }
       ]
     },
     "mdx": {

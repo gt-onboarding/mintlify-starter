@@ -89,58 +89,58 @@
       {
         "tabs": [
           {
-            "tab": "Guides",
+            "tab": "ガイド",
             "groups": [
               {
-                "group": "Getting started",
+                "group": "はじめに",
                 "pages": [
-                  "index",
-                  "quickstart",
-                  "development"
+                  "ja/index",
+                  "ja/quickstart",
+                  "ja/development"
                 ]
               },
               {
-                "group": "Customization",
+                "group": "カスタマイズ",
                 "pages": [
-                  "essentials/settings",
-                  "essentials/navigation"
+                  "ja/essentials/settings",
+                  "ja/essentials/navigation"
                 ]
               },
               {
-                "group": "Writing content",
+                "group": "コンテンツの作成",
                 "pages": [
-                  "essentials/markdown",
-                  "essentials/code",
-                  "essentials/images",
-                  "essentials/reusable-snippets"
+                  "ja/essentials/markdown",
+                  "ja/essentials/code",
+                  "ja/essentials/images",
+                  "ja/essentials/reusable-snippets"
                 ]
               },
               {
-                "group": "AI tools",
+                "group": "AI ツール",
                 "pages": [
-                  "ai-tools/cursor",
-                  "ai-tools/claude-code",
-                  "ai-tools/windsurf"
+                  "ja/ai-tools/cursor",
+                  "ja/ai-tools/claude-code",
+                  "ja/ai-tools/windsurf"
                 ]
               }
             ]
           },
           {
-            "tab": "API reference",
+            "tab": "APIリファレンス",
             "groups": [
               {
-                "group": "API documentation",
+                "group": "API ドキュメント",
                 "pages": [
-                  "api-reference/introduction"
+                  "ja/api-reference/introduction"
                 ]
               },
               {
-                "group": "Endpoint examples",
+                "group": "エンドポイントの例",
                 "pages": [
-                  "api-reference/endpoint/get",
-                  "api-reference/endpoint/create",
-                  "api-reference/endpoint/delete",
-                  "api-reference/endpoint/webhook"
+                  "ja/api-reference/endpoint/get",
+                  "ja/api-reference/endpoint/create",
+                  "ja/api-reference/endpoint/delete",
+                  "ja/api-reference/endpoint/webhook"
                 ]
               }
             ]
@@ -149,12 +149,12 @@
         "global": {
           "anchors": [
             {
-              "anchor": "Documentation",
+              "anchor": "ドキュメント",
               "href": "https://mintlify.com/docs",
               "icon": "book-open-cover"
             },
             {
-              "anchor": "Blog",
+              "anchor": "ブログ",
               "href": "https://mintlify.com/blog",
               "icon": "newspaper"
             }

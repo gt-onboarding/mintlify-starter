@@ -1,0 +1,340 @@
+---
+title: 'グローバル設定'
+description: 'Mintlify では docs.json ファイルを使って、ドキュメントサイトの外観や挙動を細かくコントロールできます'
+icon: 'gear'
+---
+
+すべての Mintlify サイトには、基本的な設定を行うための `docs.json` 設定ファイルが必要です。以下の [プロパティ](#properties) について詳しく見ていきましょう。
+
+<div id="properties">
+  ## プロパティ
+</div>
+
+<ResponseField name="name" type="string" required>
+  プロジェクト名。サイト全体のタイトルとして使用されます。
+
+  例: `mintlify`
+</ResponseField>
+
+<ResponseField name="navigation" type="Navigation[]" required>
+  各グループと、そのグループ内のすべてのページを含む配列
+
+  <Expandable title="ナビゲーション">
+    <ResponseField name="group" type="string">
+      グループ名。
+
+      例: `Settings`
+    </ResponseField>
+
+    <ResponseField name="pages" type="string[]">
+      ページとして使用される markdown ファイルへの相対パス。
+
+      例: `["customization", "page"]`
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="logo" type="string or object">
+  ロゴ画像へのパス、または「light」「dark」モード用ロゴ画像へのパスを持つオブジェクト
+
+  <Expandable title="ロゴ">
+    <ResponseField name="light" type="string">
+      ライトモードで使用するロゴへのパス
+    </ResponseField>
+
+    <ResponseField name="dark" type="string">
+      ダークモードで使用するロゴへのパス
+    </ResponseField>
+
+    <ResponseField name="href" type="string" default="/">
+      ロゴをクリックしたときのリンク先
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="favicon" type="string">
+  favicon 画像へのパス
+</ResponseField>
+
+<ResponseField name="colors" type="Colors">
+  グローバルテーマ用の 16 進数のカラーコード
+
+  <Expandable title="色">
+    <ResponseField name="primary" type="string" required>
+      プライマリカラー。主にライトモードで、ハイライトされたコンテンツ、セクションヘッダー、アクセントに使用されます
+    </ResponseField>
+
+    <ResponseField name="light" type="string">
+      ダークモード用のプライマリカラー。主にダークモードで、ハイライトされたコンテンツ、セクションヘッダー、アクセントに使用されます
+    </ResponseField>
+
+    <ResponseField name="dark" type="string">
+      重要なボタンに使用されるプライマリカラー
+    </ResponseField>
+
+    <ResponseField name="background" type="object">
+      ライトモードとダークモードの両方で使用される背景色
+
+      <Expandable title="オブジェクト">
+        <ResponseField name="light" type="string" required>
+          ライトモードでの背景色の 16 進数カラーコード
+        </ResponseField>
+
+        <ResponseField name="dark" type="string" required>
+          ダークモードでの背景色の 16 進数カラーコード
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="topbarLinks" type="TopbarLink[]">
+  トップバーに含めたいリンクの `name` と `url` の配列
+
+  <Expandable title="TopbarLink">
+    <ResponseField name="name" type="string">
+      ボタンの名前。
+
+      例: `Contact us`
+    </ResponseField>
+
+    <ResponseField name="url" type="string">
+      ボタンをクリックしたときの遷移先の URL。例: `https://mintlify.com/docs`
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="topbarCtaButton" type="Call to Action">
+  <Expandable title="トップバーの Call to Action">
+    <ResponseField name="type" type={'"link" or "github"'} default="link">
+      `link` の場合はボタンを表示します。`github` の場合は、指定された URL のリポジトリ情報（GitHub スター数を含む）を表示します。
+    </ResponseField>
+
+    <ResponseField name="url" type="string">
+      `link` の場合: ボタンのリンク先。
+
+      `github` の場合: GitHub 情報を読み込むリポジトリへのリンク。
+    </ResponseField>
+
+    <ResponseField name="name" type="string">
+      ボタン内のテキスト。`type` が `link` の場合にのみ必須です。
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="versions" type="string[]">
+  バージョン名の配列。ナビゲーションバーのドロップダウンで異なるバージョンのドキュメントを表示したい場合にのみ使用します。
+</ResponseField>
+
+<ResponseField name="anchors" type="Anchor[]">
+  アンカーの配列です。`icon`、`color`、`url` を含みます。
+
+  <Expandable title="アンカー">
+    <ResponseField name="icon" type="string">
+      アンカーの表示に使われる [Font Awesome](https://fontawesome.com/search?q=heart) のアイコンです。
+
+      例: `comments`
+    </ResponseField>
+
+    <ResponseField name="name" type="string">
+      アンカーラベルの名前です。
+
+      例: `Community`
+    </ResponseField>
+
+    <ResponseField name="url" type="string">
+      アンカーに含めるページを判別するための URL の先頭部分です。一般的には、ページを配置するフォルダ名になります。
+    </ResponseField>
+
+    <ResponseField name="color" type="string">
+      アンカーアイコンの背景色を表す 16 進数のカラーコードです。`from` と `to` のプロパティを持つオブジェクトを渡すことで、各プロパティに 16 進数のカラーコードを指定したグラデーションにすることもできます。
+    </ResponseField>
+
+    <ResponseField name="version" type="string">
+      対応するドキュメントバージョンが選択されるまでアンカーを非表示にしておきたい場合に使用します。
+    </ResponseField>
+
+    <ResponseField name="isDefaultHidden" type="boolean" default="false">
+      アンカー内のドキュメントへの直接リンクを共有するまでアンカーを非表示にしておきたい場合は、`true` を渡します。
+    </ResponseField>
+
+    <ResponseField name="iconType" default="duotone" type="string">
+      次のいずれか: &quot;brands&quot;, &quot;duotone&quot;, &quot;light&quot;, &quot;sharp-solid&quot;, &quot;solid&quot;, &quot;thin&quot;
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="topAnchor" type="Object">
+  最上位のアンカーに対するデフォルト設定を上書きします。
+
+  <Expandable title="オブジェクト">
+    <ResponseField name="name" default="Documentation" type="string">
+      最上位アンカーの名前です。
+    </ResponseField>
+
+    <ResponseField name="icon" default="book-open" type="string">
+      Font Awesome のアイコンです。
+    </ResponseField>
+
+    <ResponseField name="iconType" default="duotone" type="string">
+      次のいずれか: &quot;brands&quot;, &quot;duotone&quot;, &quot;light&quot;, &quot;sharp-solid&quot;, &quot;solid&quot;, &quot;thin&quot;
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="tabs" type="Tabs[]">
+  ナビゲーション用タブの配列です。
+
+  <Expandable title="Tabs">
+    <ResponseField name="name" type="string">
+      タブラベルの名前です。
+    </ResponseField>
+
+    <ResponseField name="url" type="string">
+      タブに含めるページを判別するための URL の先頭部分です。一般的には、ページを配置するフォルダ名になります。
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="api" type="API">
+  API 設定用の構成です。API ページの詳細は [API コンポーネント](/ja/api-playground/demo) を参照してください。
+
+  <Expandable title="API">
+    <ResponseField name="baseUrl" type="string">
+      すべての API エンドポイントで使用されるベース URL です。`baseUrl` が配列の場合、ユーザーが切り替え可能な複数のベース URL オプションを指定できます。
+    </ResponseField>
+
+    <ResponseField name="auth" type="Auth">
+      <Expandable title="Auth">
+        <ResponseField name="method" type="&#x22;bearer&#x22; | &#x22;basic&#x22; | &#x22;key&#x22;">
+          すべての API エンドポイントで使用される認証方式です。
+        </ResponseField>
+
+        <ResponseField name="name" type="string">
+          API playground で使用される認証パラメーター名です。
+
+          method が `basic` の場合、形式は `[usernameName]:[passwordName]` とする必要があります。
+        </ResponseField>
+
+        <ResponseField name="inputPrefix" type="string">
+          認証入力フィールドの接頭辞として使われるデフォルト値です。
+
+          例: `inputPrefix` を `AuthKey` とした場合、認証フィールドのデフォルト入力結果は `AuthKey` になります。
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="playground" type="Playground">
+      API playground の設定です。
+
+      <Expandable title="Playground">
+        <ResponseField name="mode" default="show" type="&#x22;show&#x22; | &#x22;simple&#x22; | &#x22;hide&#x22;">
+          playground を表示するか、非表示にするか、あるいは追加のユーザー操作なしでエンドポイントのみを表示するか (`simple`) を指定します。
+
+          詳細は [playground ガイド](/ja/api-playground/demo) を参照してください。
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="maintainOrder" type="boolean">
+      このフラグを有効にすると、OpenAPI ページ内のキーの順序が、OpenAPI ファイルで定義されたキーの順序と一致するようになります。
+
+      <Warning>この挙動は間もなくデフォルトで有効になり、その時点でこのフィールドは非推奨になります。</Warning>
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="openapi" type="string | string[]">
+  OpenAPI ファイルを指す URL または相対パスの文字列、もしくはそれらの文字列配列です。
+
+  例:
+
+  <CodeGroup>
+    ```json Absolute
+    "openapi": "https://example.com/openapi.json"
+    ```
+
+    ```json Relative
+    "openapi": "/openapi.json"
+    ```
+
+    ```json Multiple
+    "openapi": ["https://example.com/openapi1.json", "/openapi2.json", "/openapi3.json"]
+    ```
+  </CodeGroup>
+</ResponseField>
+
+<ResponseField name="footerSocials" type="FooterSocials">
+  ソーシャルメディアアカウントを表すオブジェクトで、key:property のペアでソーシャルメディアプラットフォームとそのアカウント URL を表します。
+
+  例:
+
+  ```json
+  {
+    "x": "https://x.com/mintlify",
+    "website": "https://mintlify.com"
+  }
+  ```
+
+  <Expandable title="FooterSocials">
+    <ResponseField name="[key]" type="string">
+      次のいずれかの値です: `website`, `facebook`, `x`, `discord`, `slack`, `github`, `linkedin`, `instagram`, `hacker-news`
+
+      例: `x`
+    </ResponseField>
+
+    <ResponseField name="property" type="string">
+      対応するソーシャルメディアプラットフォームへの URL です。
+
+      例: `https://x.com/mintlify`
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="feedback" type="Feedback">
+  フィードバックボタンを有効化するための設定です。
+
+  <Expandable title="Feedback">
+    <ResponseField name="suggestEdit" type="boolean" default="false">
+      ユーザーが pull request を通じて編集提案を行えるボタンを有効化します。
+    </ResponseField>
+
+    <ResponseField name="raiseIssue" type="boolean" default="false">
+      ユーザーがドキュメントに関する issue を起票できるボタンを有効化します。
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="modeToggle" type="ModeToggle">
+  ダークモードの切り替えをカスタマイズします。
+
+  <Expandable title="ModeToggle">
+    <ResponseField name="default" type={'"light" or "dark"'}>
+      新規ユーザーに対して、常にライトモードまたはダークモードを表示するかどうかを設定します。設定されていない場合は、ユーザーのオペレーティングシステムと同じモードがデフォルトとして使用されます。
+    </ResponseField>
+
+    <ResponseField name="isHidden" type="boolean" default="false">
+      ダーク／ライトモードの切り替えを非表示にするには true に設定します。`isHidden` を `default` と組み合わせることで、ドキュメントをライトモードまたはダークモードのみに固定できます。例：
+
+      <CodeGroup>
+        ```json Only Dark Mode
+        "modeToggle": {
+          "default": "dark",
+          "isHidden": true
+        }
+        ```
+
+        ```json Only Light Mode
+        "modeToggle": {
+          "default": "light",
+          "isHidden": true
+        }
+        ```
+      </CodeGroup>
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="backgroundImage" type="string">
+  すべてのページで背景として表示される画像です。[Infisical](https://infisical.com/docs) および [FRPC](https://frpc.io) の例をご覧ください。
+</ResponseField>

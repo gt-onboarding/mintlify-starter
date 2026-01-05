@@ -1,0 +1,109 @@
+---
+title: '開発'
+description: 'ドキュメントの更新内容をローカルでプレビューする'
+---
+
+<Info>
+  **前提条件**:
+  - Node.js バージョン 19 以降
+  - `docs.json` ファイルを含むドキュメントリポジトリ
+</Info>
+
+お使いのオペレーティングシステムで Mintlify をインストールして実行するには、次の手順に従ってください。
+
+<Steps>
+<Step title="Mintlify CLI をインストールする">
+
+```bash
+npm i -g mint
+```
+</Step>
+
+<Step title="ローカルでプレビューする">
+
+`docs.json` ファイルがあるドキュメントのディレクトリに移動し、次のコマンドを実行します：
+
+```bash
+mint dev
+```
+
+`http://localhost:3000` でドキュメントのローカルプレビューが表示されます。
+
+</Step>
+</Steps>
+
+<div id="custom-ports">
+  ## カスタムポート
+</div>
+
+デフォルトでは、Mintlify はポート 3000 を使用します。`--port` フラグを使うことで、Mintlify が実行されるポートをカスタマイズできます。たとえば、Mintlify をポート 3333 で実行する場合は、次のコマンドを使用します。
+
+```bash
+mint dev --port 3333
+```
+
+すでに使用中のポートで Mintlify を実行しようとすると、Mintlify は自動的に次の空きポートを使用します。
+
+```md
+Port 3000 is already in use. Trying 3001 instead.
+```
+
+
+<div id="mintlify-versions">
+  ## Mintlify のバージョン
+</div>
+
+各 CLI リリースは、それぞれ特定の Mintlify バージョンに対応していることにご注意ください。ローカルでのプレビューが本番環境のバージョンと一致しない場合は、CLI を更新してください。
+
+```bash
+npm mint update
+```
+
+
+<div id="validating-links">
+  ## リンクの検証
+</div>
+
+CLI を使用して、ドキュメント内のリンクを検証できます。リンク切れを特定するには、次のコマンドを実行します。
+
+```bash
+mint broken-links
+```
+
+
+<div id="deployment">
+  ## デプロイ
+</div>
+
+デプロイが成功すると、次のような画面が表示されます。
+
+<Frame>
+  <img src="/images/checks-passed.png" alt="すべてのチェックが完了したことを示すデプロイ確認メッセージのスクリーンショット。" style={{ borderRadius: '0.5rem' }} />
+</Frame>
+
+<div id="code-formatting">
+  ## コードのフォーマット
+</div>
+
+IDE 上で MDX を認識してフォーマットできるようにするため、拡張機能の利用をおすすめします。VSCode を使用している場合は、構文ハイライト用に [MDX VSCode extension](https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx)、コードの整形用に [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) の利用を検討してください。
+
+<div id="troubleshooting">
+  ## トラブルシューティング
+</div>
+
+<AccordionGroup>
+  <Accordion title='エラー: darwin-arm64 ランタイムを使用して「sharp」モジュールを読み込めませんでした'>
+
+    使用している Node.js のバージョンが古いことが原因の可能性があります。次の手順を試してください:
+    1. 現在インストールされている CLI を削除します: `npm remove -g mint`
+    2. Node v19 以上にアップグレードします。
+    3. CLI を再インストールします: `npm i -g mint`
+  </Accordion>
+
+  <Accordion title="問題: 不明なエラーが発生する">
+  
+    解決策: ホームディレクトリに移動して、`~/.mintlify` ディレクトリを削除します。その後、再度 `mint dev` を実行します。
+  </Accordion>
+</AccordionGroup>
+
+最新の CLI バージョンでの変更点が気になりますか？[CLI の変更履歴](https://www.npmjs.com/package/mintlify?activeTab=versions)を確認してください。
