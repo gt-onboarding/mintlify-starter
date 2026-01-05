@@ -1,0 +1,115 @@
+---
+title: "再利用可能なスニペット"
+description: "コンテンツの同期を保つための再利用可能なカスタムスニペット"
+icon: "recycle"
+---
+
+import SnippetIntro from '/snippets/ja/snippet-intro.mdx';
+
+<SnippetIntro />
+
+
+<div id="creating-a-custom-snippet">
+  ## カスタムスニペットの作成
+</div>
+
+**前提条件**: スニペットファイルは必ず `snippets` ディレクトリ内に作成してください。
+
+<Note>
+  `snippets` ディレクトリ内の任意のページはスニペットとして扱われ、単独のページとしては
+  レンダリングされません。スニペットから単独のページを作成したい場合は、そのスニペットを
+  別のファイルにインポートし、コンポーネントとして使用してください。
+</Note>
+
+<div id="default-export">
+  ### デフォルトエクスポート
+</div>
+
+1. 複数の場所で再利用したいコンテンツをスニペットファイルに追加します。必要に応じて、スニペットをインポートするときに props で渡せる変数を追加することもできます。
+
+```mdx snippets/my-snippet.mdx
+Hello world! This is my content I want to reuse across pages. My keyword of the
+day is {word}.
+```
+
+<Warning>
+  インポートが正しく動作するように、再利用したいコンテンツは必ず `snippets` ディレクトリ内に配置してください。
+</Warning>
+
+2. 利用先のファイルにスニペットをインポートします。
+
+```mdx destination-file.mdx
+---
+title: マイタイトル
+description: マイ説明
+---
+
+import MySnippet from '/snippets/path/to/my-snippet.mdx';
+
+## ヘッダー
+
+Lorem impsum dolor sit amet.
+
+<MySnippet word="bananas" />
+```
+
+
+<div id="reusable-variables">
+  ### 再利用できる変数
+</div>
+
+1. スニペットファイルから変数をエクスポートします。
+
+```mdx snippets/path/to/custom-variables.mdx
+export const myName = 'my name';
+
+export const myObject = { fruit: 'strawberries' };
+```
+
+2. 宛先ファイルでスニペットをインポートし、その変数を使用します:
+
+```mdx destination-file.mdx
+---
+title: My title
+description: My Description
+---
+
+import { myName, myObject } from '/snippets/path/to/custom-variables.mdx';
+
+Hello, my name is {myName} and I like {myObject.fruit}.
+```
+
+
+<div id="reusable-components">
+  ### 再利用可能なコンポーネント
+</div>
+
+1. スニペットファイル内で、props を受け取るコンポーネントをアロー関数としてエクスポートする形で作成します。
+
+```mdx snippets/custom-component.mdx
+export const MyComponent = ({ title }) => (
+  <div>
+    <h1>{title}</h1>
+    <p>... snippet content ...</p>
+  </div>
+);
+```
+
+<Warning>
+  MDX はアロー関数の本体内ではコンパイルされません。可能な場合は HTML 構文を使うか、MDX を使う必要がある場合は default export を使用してください。
+</Warning>
+
+2. スニペットを使用先のファイルに import し、props を渡します
+
+```mdx destination-file.mdx
+---
+title: My title
+description: My Description
+---
+
+import { MyComponent } from '/snippets/custom-component.mdx';
+
+Lorem ipsum dolor sit amet.
+
+<MyComponent title={'Custom title'} />
+```
